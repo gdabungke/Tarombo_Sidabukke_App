@@ -1,0 +1,66 @@
+/* Efek Hover Interaktif Kartu Silsilah D3 */
+#container-tree-graphic,
+#genealogy-svg {
+  cursor: grab !important;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+#container-tree-graphic:active,
+#genealogy-svg:active {
+  cursor: grabbing !important;
+}
+
+g.node {
+  cursor: pointer;
+}
+
+g.node rect {
+  transition: stroke 0.2s ease-in-out, stroke-width 0.2s ease-in-out;
+}
+
+/* Biarkan warna teks tetap mengikuti variabel tema (gelap/terang) */
+g.node text {
+  pointer-events: none;
+}
+
+/* Saat kartu tokoh silsilah di-hover */
+g.node:hover rect {
+  stroke: var(--accent-red, #ef4444) !important;
+  stroke-width: 2px !important;
+  fill: var(--bg-card-hover, #242430) !important;
+  filter: drop-shadow(0 8px 18px rgba(239, 68, 68, 0.25)) !important;
+}
+
+g.node:hover text {
+  fill: #ffffff !important;
+}
+
+/* Hover Tombol Navigasi Pill */
+.nav-pill-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Hover Menu Dropdown */
+.pill-user-btn:hover {
+  border-color: var(--accent-red);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Hover Kartu Ringkasan Dashboard */
+.dashboard-hover-card {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.dashboard-hover-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  border-color: rgba(185, 28, 28, 0.4) !important;
+}

@@ -1,0 +1,209 @@
+/* Viewport Konten Utama */
+.app-viewport {
+  flex: 1;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: 76px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tampilan Pohon Silsilah Fullscreen */
+#view-tree {
+  padding-top: 0 !important;
+  height: 100% !important;
+  flex: 1;
+}
+
+/* Floating Navbar Mengambang (Pill Style) */
+.app-floating-navbar {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: rgba(24, 24, 32, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 40px;
+  padding: 6px 14px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  max-width: 96vw;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+  box-sizing: border-box;
+}
+
+.pill-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+/* Tombol Menu Navigasi */
+.nav-pill-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted, #9ca3af);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.nav-pill-btn.active {
+  background: var(--accent-red, #b91c1c) !important;
+  color: #fff !important;
+  font-weight: 700;
+}
+
+/* Dropdown Profil Pengguna */
+.pill-user-menu {
+  position: relative;
+}
+
+.pill-user-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-color, #374151);
+  padding: 4px 10px 4px 6px;
+  border-radius: 20px;
+  cursor: pointer;
+  color: var(--text-main, #f3f4f6);
+  font-size: 11px;
+  font-weight: 600;
+  outline: none;
+}
+
+.pill-user-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent-red, #b91c1c);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.pill-dropdown-box {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 36px;
+  width: 190px;
+  background: var(--bg-card, #1c1c24);
+  border: 1px solid var(--border-color, #374151);
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  padding: 8px;
+  z-index: 1100;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.dropdown-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 32px;
+  padding: 0 8px;
+  background: transparent;
+  border: none;
+  border-radius: 5px;
+  color: var(--text-main, #f3f4f6);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.dropdown-btn svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+.dropdown-btn.logout {
+  color: #ef4444;
+}
+
+/* Modal Backdrop Blur & Animasi */
+.modal-backdrop-blur {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 15, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.modal-backdrop-blur.show {
+  display: flex !important;
+  opacity: 1;
+}
+
+.modal-box-animated {
+  background: var(--bg-card, #1c1c24);
+  padding: 22px;
+  border-radius: 12px;
+  border: 1px solid rgba(185, 28, 28, 0.4);
+  max-width: 440px;
+  width: 92%;
+  color: var(--text-main, #f3f4f6);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  transform: scale(0.92) translateY(12px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-backdrop-blur.show .modal-box-animated {
+  transform: scale(1) translateY(0);
+}
+
+/* Komponen Ikon Vektor */
+.ui-icon {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.tugu-icon {
+  width: 40px;
+  height: 40px;
+  fill: none;
+  stroke: var(--accent-red, #ef4444);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
