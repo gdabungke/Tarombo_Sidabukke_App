@@ -2,7 +2,11 @@ name: Deploy Frontend to GitHub Pages
 
 on:
   push:
-    branches: [ main ] # Akan berjalan otomatis setiap kali Anda push ke branch main
+    branches: [ main ]
+
+# Tambahkan izin ini agar bot GitHub Actions diizinkan melakukan push ke branch gh-pages
+permissions:
+  contents: write
 
 jobs:
   build-and-deploy:
@@ -21,11 +25,11 @@ jobs:
         run: |
           npm install
           npm run build
-        working-directory: ./frontend # Masuk ke folder frontend tempat kode React/Vite berada
+        working-directory: ./frontend
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./frontend/dist # Mengambil hasil build dari folder dist frontend
+          publish_dir: ./frontend/dist
           publish_branch: gh-pages
