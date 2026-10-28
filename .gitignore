@@ -1,5 +1,7 @@
 # Abaikan folder backend
 backend/
+
+# Abaikan file teks rangkuman kode
 full_project_code.txt
 
 # Abaikan file environment atau database lokal
