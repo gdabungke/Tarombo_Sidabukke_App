@@ -129,19 +129,30 @@ export async function renderGenealogyTree(svgSelector: string, branchFilter?: st
   });
 
   try {
-    const res = await fetch("http://localhost:5001/api/genealogy/tree");
-    if (!res.ok) throw new Error("Gagal memuat silsilah");
+  let rootData;
 
+  // Cek apakah aplikasi sedang berjalan di GitHub Pages atau di localhost
+  const isGitHubPages = window.location.hostname.includes("github.io");
+
+  if (isGitHubPages) {
+    // 1. Opsi saat online di GitHub Pages (mengambil seed.json statis)
+    console.log("Memuat data statis dari seed.json untuk GitHub Pages...");
+    const res = await fetch("./seed.json"); // Sesuaikan path jika ditaruh di dalam folder src/data/
+    if (!res.ok) throw new Error("Gagal memuat file seed.json");
     const json = await res.json();
-    let rootData = json.data;
-    if (!rootData) return;
+    rootData = Array.isArray(json) ? buildHierarchy(json) : json.data || json;
+  } else {
+    // 2. Opsi saat berjalan di komputer lokal (mengambil dari backend SQL/Prisma)
+    console.log("Memuat data dari backend lokal...");
+    const res = await fetch("http://localhost:5001/api/genealogy/tree");
+    if (!res.ok) throw new Error("Gagal memuat silsilah dari server lokal");
+    const json = await res.json();
+    rootData = json.data;
+  }
 
-    if (branchFilter && branchFilter.trim() !== "") {
-      const match = (rootData.children || []).find((c: any) => c.fullName.includes(branchFilter));
-      if (match) {
-        rootData = { ...rootData, children: [match] };
-      }
-    }
+  if (!rootData) return;
+
+  // ... sisa kode selanjutnya tetap sama
 
     const root: any = d3.hierarchy(rootData);
     root.x0 = width / 2;
@@ -447,4 +458,35 @@ export function searchAndFocusMember(name: string): boolean {
   });
 
   return found;
+}
+
+/**
+ * Fungsi untuk mengubah data array datar dari seed.json 
+ * menjadi struktur hierarki (parent-child) untuk D3.js
+ */
+function buildHierarchy(flatData: any[]) {
+  const map = new Map();
+  let root = null;
+
+  // Masukkan semua data ke dalam map
+  flatData.forEach((item) => {
+    map.set(item.id, { ...item, children: [] });
+  });
+
+  // Susun hubungan parent-child berdasarkan parentIdRaw atau parentId
+  flatData.forEach((item) => {
+    const node = map.get(item.id);
+    const parentId = item.parentIdRaw || item.parentId;
+    
+    if (parentId) {
+      const parent = map.get(parentId);
+      if (parent) {
+        parent.children.push(node);
+      }
+    } else {
+      root = node; // Node paling atas (Raja Sinalin / Generasi 1)
+    }
+  });
+
+  return root;
 }

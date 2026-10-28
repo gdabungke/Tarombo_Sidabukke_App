@@ -8,15 +8,30 @@ import { openModalFromRenderer, openAddChildModalFromRenderer } from "./modalHel
 export async function renderGenealogyTable(containerSelector: string, branchFilter?: string) {
   const container = document.querySelector(containerSelector) as HTMLElement;
   if (!container) return;
-
+  
   container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Mamillit data tabel (Memuat tabel)...</div>`;
 
   try {
-    const res = await fetch("http://localhost:5001/api/genealogy/tree");
-    if (!res.ok) throw new Error("Gagal memuat data");
+    let rootData;
 
-    const json = await res.json();
-    let rootData = json.data;
+    // Cek apakah aplikasi sedang berjalan di GitHub Pages atau di localhost
+    const isGitHubPages = window.location.hostname.includes("github.io");
+
+    if (isGitHubPages) {
+      // 1. Opsi saat online di GitHub Pages (mengambil seed.json statis)
+      console.log("Memuat data tabel statis dari seed.json untuk GitHub Pages...");
+      const res = await fetch("./seed.json");
+      if (!res.ok) throw new Error("Gagal memuat file seed.json");
+      const json = await res.json();
+      rootData = Array.isArray(json) ? buildHierarchy(json) : json.data || json;
+    } else {
+      // 2. Opsi saat berjalan di komputer lokal (mengambil dari backend SQL/Prisma)
+      console.log("Memuat data tabel dari backend lokal...");
+      const res = await fetch("http://localhost:5001/api/genealogy/tree");
+      if (!res.ok) throw new Error("Gagal memuat data dari server lokal");
+      const json = await res.json();
+      rootData = json.data;
+    }
 
     if (!rootData) {
       container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Data silsilah kosong.</div>`;
@@ -27,10 +42,7 @@ export async function renderGenealogyTable(containerSelector: string, branchFilt
     if (branchFilter && branchFilter.trim() !== "") {
       const match = (rootData.children || []).find((c: any) => c.fullName.includes(branchFilter));
       if (match) {
-        rootData = {
-          ...rootData,
-          children: [match]
-        };
+        rootData = { ...rootData, children: [match] };
       }
     }
 
@@ -38,13 +50,11 @@ export async function renderGenealogyTable(containerSelector: string, branchFilt
     function flatten(node: any, parentName = "-") {
       const children = node.children || node._children || [];
       const hasChildren = children.length > 0;
-
       flatList.push({ ...node, parentName, hasChildren });
       for (const child of children) {
         flatten(child, node.fullName || "-");
       }
     }
-
     flatten(rootData);
 
     let tableHtml = `
@@ -69,7 +79,6 @@ export async function renderGenealogyTable(containerSelector: string, branchFilt
       const statusLabel = isAlive ? "Mangolu" : "Marujung Ngolu";
       const badgeBg = isAlive ? "rgba(16, 185, 129, 0.15)" : "rgba(107, 114, 128, 0.2)";
       const badgeColor = isAlive ? "#34d399" : "#9ca3af";
-
       const spouse = item.spouseInfo && item.spouseInfo.trim() !== "" ? item.spouseInfo : '<span style="color: var(--text-muted); font-style: italic;">(Belum diisi)</span>';
       const origin = item.originVillage && item.originVillage.trim() !== "" ? item.originVillage : '<span style="color: var(--text-muted); font-style: italic;">(Belum diisi)</span>';
 
@@ -90,27 +99,21 @@ export async function renderGenealogyTable(containerSelector: string, branchFilt
           </td>
           <td style="padding: 10px 14px; text-align: center;">
             <div style="display: flex; align-items: center; justify-content: center; gap: 5px;">
-              <button class="tarombo-btn btn-table-view"
-                      data-id="${item.id || ''}"
-                      data-name="${item.fullName || 'Tanpa Nama'}"
-                      data-alias="${item.taromboName || ''}"
-                      data-alive="${isAlive}"
-                      data-gen="${item.generationLevel || '-'}"
-                      data-spouse="${item.spouseInfo || ''}"
-                      data-origin="${item.originVillage || ''}"
-                      data-notes="${item.notes || ''}"
-                      style="display: flex; align-items: center; gap: 4px; background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;">
-                <svg style="width: 11px; height: 11px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                Detail
+              <button class="tarombo-btn btn-table-view" 
+                data-id="${item.id || ''}" 
+                data-name="${item.fullName || 'Tanpa Nama'}" 
+                data-alias="${item.taromboName || ''}" 
+                data-alive="${isAlive}" 
+                data-gen="${item.generationLevel || '-'}" 
+                data-spouse="${item.spouseInfo || ''}" 
+                data-origin="${item.originVillage || ''}" 
+                data-notes="${item.notes || ''}" 
+                style="display: flex; align-items: center; gap: 4px; background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;">
+                <svg style="width: 11px; height: 11px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Detail
               </button>
               ${
                 !item.hasChildren
-                  ? `<button class="tarombo-btn btn-table-add"
-                            data-parent-id="${item.id || ''}"
-                            data-parent-name="${item.fullName || 'Tanpa Nama'}"
-                            data-gen="${item.generationLevel || 1}"
-                            title="+ Tambah Anak"
-                            style="display: flex; align-items: center; justify-content: center; background: #059669; color: #fff; border: none; padding: 4px 7px; border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer;">
+                  ? `<button class="tarombo-btn btn-table-add" data-parent-id="${item.id || ''}" data-parent-name="${item.fullName || 'Tanpa Nama'}" data-gen="${item.generationLevel || 1}" title="+ Tambah Anak" style="display: flex; align-items: center; justify-content: center; background: #059669; color: #fff; border: none; padding: 4px 7px; border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer;">
                       <svg style="width: 11px; height: 11px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                     </button>`
                   : ''
@@ -151,16 +154,44 @@ export async function renderGenealogyTable(containerSelector: string, branchFilt
       btn.addEventListener("click", (e) => {
         e.stopPropagation();
         e.preventDefault();
-
         const parentId = btn.getAttribute("data-parent-id") || "";
         const parentName = btn.getAttribute("data-parent-name") || "Tokoh Ini";
         const currentGen = parseInt(btn.getAttribute("data-gen") || "1") || 1;
-
         openAddChildModalFromRenderer({ id: parentId, fullName: parentName }, currentGen);
       });
     });
 
   } catch (err) {
+    console.error("Gagal memuat tabel silsilah:", err);
     container.innerHTML = `<div style="text-align: center; color: #f87171; padding: 40px;">Gagal memuat tabel silsilah.</div>`;
   }
+}
+
+/**
+ * Fungsi untuk mengubah data array datar dari seed.json 
+ * menjadi struktur hierarki (parent-child)
+ */
+function buildHierarchy(flatData: any[]) {
+  const map = new Map();
+  let root = null;
+
+  flatData.forEach((item) => {
+    map.set(item.id, { ...item, children: [] });
+  });
+
+  flatData.forEach((item) => {
+    const node = map.get(item.id);
+    const parentId = item.parentIdRaw || item.parentId;
+    
+    if (parentId) {
+      const parent = map.get(parentId);
+      if (parent) {
+        parent.children.push(node);
+      }
+    } else {
+      root = node;
+    }
+  });
+
+  return root;
 }

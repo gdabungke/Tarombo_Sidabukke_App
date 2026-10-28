@@ -8,15 +8,30 @@ import { openModalFromRenderer, openAddChildModalFromRenderer } from "./modalHel
 export async function renderByGeneration(containerSelector: string, branchFilter?: string) {
   const container = document.querySelector(containerSelector) as HTMLElement;
   if (!container) return;
-
+  
   container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Mamillit data sundut (Memuat generasi)...</div>`;
 
   try {
-    const res = await fetch("http://localhost:5001/api/genealogy/tree");
-    if (!res.ok) throw new Error("Gagal memuat data");
+    let rootData;
 
-    const json = await res.json();
-    let rootData = json.data;
+    // Cek apakah aplikasi sedang berjalan di GitHub Pages atau di localhost
+    const isGitHubPages = window.location.hostname.includes("github.io");
+
+    if (isGitHubPages) {
+      // 1. Opsi saat online di GitHub Pages (mengambil seed.json statis)
+      console.log("Memuat data generasi statis dari seed.json untuk GitHub Pages...");
+      const res = await fetch("./seed.json");
+      if (!res.ok) throw new Error("Gagal memuat file seed.json");
+      const json = await res.json();
+      rootData = Array.isArray(json) ? buildHierarchy(json) : json.data || json;
+    } else {
+      // 2. Opsi saat berjalan di komputer lokal (mengambil dari backend SQL/Prisma)
+      console.log("Memuat data generasi dari backend lokal...");
+      const res = await fetch("http://localhost:5001/api/genealogy/tree");
+      if (!res.ok) throw new Error("Gagal memuat data dari server lokal");
+      const json = await res.json();
+      rootData = json.data;
+    }
 
     if (!rootData) {
       container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Data silsilah kosong.</div>`;
@@ -27,33 +42,22 @@ export async function renderByGeneration(containerSelector: string, branchFilter
     if (branchFilter && branchFilter.trim() !== "") {
       const match = (rootData.children || []).find((c: any) => c.fullName.includes(branchFilter));
       if (match) {
-        rootData = {
-          ...rootData,
-          children: [match]
-        };
+        rootData = { ...rootData, children: [match] };
       }
     }
 
     // Kelompokkan node berdasarkan level generasi (sundut)
     const genMap: Record<number, any[]> = {};
-
     function flatten(node: any) {
       const g = node.generationLevel || 1;
       if (!genMap[g]) genMap[g] = [];
-
       const children = node.children || node._children || [];
       const hasChildren = children.length > 0;
-
-      genMap[g].push({
-        ...node,
-        hasChildren
-      });
-
+      genMap[g].push({ ...node, hasChildren });
       for (const child of children) {
         flatten(child);
       }
     }
-
     flatten(rootData);
 
     const sortedGens = Object.keys(genMap).map(Number).sort((a, b) => a - b);
@@ -72,7 +76,6 @@ export async function renderByGeneration(containerSelector: string, branchFilter
             </div>
             <small style="color: var(--text-muted); font-size: 11px;">${members.length} Anggota Terdata</small>
           </div>
-
           <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px;">
       `;
 
@@ -81,21 +84,20 @@ export async function renderByGeneration(containerSelector: string, branchFilter
         const statusLabel = isAlive ? "Mangolu" : "Marujung Ngolu";
         const badgeBg = isAlive ? "rgba(16, 185, 129, 0.15)" : "rgba(107, 114, 128, 0.2)";
         const badgeColor = isAlive ? "#34d399" : "#9ca3af";
-
         const spouse = m.spouseInfo && m.spouseInfo.trim() !== "" ? m.spouseInfo : "(Belum diisi)";
         const origin = m.originVillage && m.originVillage.trim() !== "" ? m.originVillage : "(Belum diisi)";
 
         cardsHtml += `
-          <div class="gen-member-card"
-               data-id="${m.id || ''}"
-               data-name="${m.fullName || 'Tanpa Nama'}"
-               data-alias="${m.taromboName || ''}"
-               data-alive="${isAlive}"
-               data-gen="${m.generationLevel || g}"
-               data-spouse="${m.spouseInfo || ''}"
-               data-origin="${m.originVillage || ''}"
-               data-notes="${m.notes || ''}"
-               style="background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; padding: 10px 12px; cursor: pointer; transition: transform 0.15s ease, border-color 0.15s ease; position: relative;">
+          <div class="gen-member-card" 
+            data-id="${m.id || ''}" 
+            data-name="${m.fullName || 'Tanpa Nama'}" 
+            data-alias="${m.taromboName || ''}" 
+            data-alive="${isAlive}" 
+            data-gen="${m.generationLevel || g}" 
+            data-spouse="${m.spouseInfo || ''}" 
+            data-origin="${m.originVillage || ''}" 
+            data-notes="${m.notes || ''}" 
+            style="background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; padding: 10px 12px; cursor: pointer; transition: transform 0.15s ease, border-color 0.15s ease; position: relative;">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 6px;">
               <div>
                 <strong style="font-size: 12px; color: var(--text-main);">${m.fullName || 'Tanpa Nama'}</strong>
@@ -104,15 +106,9 @@ export async function renderByGeneration(containerSelector: string, branchFilter
               <div style="display: flex; align-items: center; gap: 6px;">
                 ${
                   !m.hasChildren
-                    ? `<button type="button"
-                               class="btn-gen-add-child"
-                               data-parent-id="${m.id || ''}"
-                               data-parent-name="${m.fullName || 'Tanpa Nama'}"
-                               data-gen="${m.generationLevel || g}"
-                               title="+ Tambah Anak Baru"
-                               style="display: flex; align-items: center; justify-content: center; background: #059669; color: #fff; border: none; width: 20px; height: 20px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer;">
-                         <svg style="width: 11px; height: 11px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                       </button>`
+                    ? `<button type="button" class="btn-gen-add-child" data-parent-id="${m.id || ''}" data-parent-name="${m.fullName || 'Tanpa Nama'}" data-gen="${m.generationLevel || g}" title="+ Tambah Anak Baru" style="display: flex; align-items: center; justify-content: center; background: #059669; color: #fff; border: none; width: 20px; height: 20px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer;">
+                        <svg style="width: 11px; height: 11px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                      </button>`
                     : ''
                 }
                 <span style="font-size: 9px; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: ${badgeBg}; color: ${badgeColor}; white-space: nowrap;">
@@ -148,7 +144,7 @@ export async function renderByGeneration(containerSelector: string, branchFilter
       el.addEventListener("click", (e) => {
         const target = e.target as HTMLElement;
         if (target.closest(".btn-gen-add-child")) return;
-
+        
         const item = {
           id: el.getAttribute("data-id"),
           fullName: el.getAttribute("data-name"),
@@ -168,16 +164,44 @@ export async function renderByGeneration(containerSelector: string, branchFilter
       btn.addEventListener("click", (e) => {
         e.stopPropagation();
         e.preventDefault();
-
         const parentId = btn.getAttribute("data-parent-id") || "";
         const parentName = btn.getAttribute("data-parent-name") || "Tokoh Ini";
         const currentGen = parseInt(btn.getAttribute("data-gen") || "1") || 1;
-
         openAddChildModalFromRenderer({ id: parentId, fullName: parentName }, currentGen);
       });
     });
 
   } catch (err) {
+    console.error("Gagal memuat visualisasi per generasi:", err);
     container.innerHTML = `<div style="text-align: center; color: #f87171; padding: 40px;">Gagal memuat visualisasi per generasi.</div>`;
   }
+}
+
+/**
+ * Fungsi untuk mengubah data array datar dari seed.json 
+ * menjadi struktur hierarki (parent-child)
+ */
+function buildHierarchy(flatData: any[]) {
+  const map = new Map();
+  let root = null;
+
+  flatData.forEach((item) => {
+    map.set(item.id, { ...item, children: [] });
+  });
+
+  flatData.forEach((item) => {
+    const node = map.get(item.id);
+    const parentId = item.parentIdRaw || item.parentId;
+    
+    if (parentId) {
+      const parent = map.get(parentId);
+      if (parent) {
+        parent.children.push(node);
+      }
+    } else {
+      root = node;
+    }
+  });
+
+  return root;
 }

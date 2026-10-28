@@ -16,6 +16,6 @@ export function sanitizePersonData<T extends Partial<Person> & { biography?: Par
   return person;
 }
 
-export function sanitizePersonsList<T extends any>(persons: T[], isLoggedIn: boolean): T[] {
-  return persons.map((p) => sanitizePersonData(p, isLoggedIn));
+export function sanitizePersonsList<T extends Partial<Person> & { biography?: Partial<Biography> | null }>(persons: T[], isLoggedIn: boolean): T[] {
+  return persons.map((p) => sanitizePersonData(p, isLoggedIn) as T);
 }

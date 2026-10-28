@@ -8,15 +8,30 @@ import { openModalFromRenderer, openAddChildModalFromRenderer } from "./modalHel
 export async function renderGenealogyList(containerSelector: string, branchFilter?: string) {
   const container = document.querySelector(containerSelector) as HTMLElement;
   if (!container) return;
-
+  
   container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Mamillit data silsilah (Memuat daftar)...</div>`;
 
   try {
-    const res = await fetch("http://localhost:5001/api/genealogy/tree");
-    if (!res.ok) throw new Error("Gagal memuat data silsilah");
+    let rootData;
 
-    const json = await res.json();
-    let rootData = json.data;
+    // Cek apakah aplikasi sedang berjalan di GitHub Pages atau di localhost
+    const isGitHubPages = window.location.hostname.includes("github.io");
+
+    if (isGitHubPages) {
+      // 1. Opsi saat online di GitHub Pages (mengambil seed.json statis)
+      console.log("Memuat data daftar statis dari seed.json untuk GitHub Pages...");
+      const res = await fetch("./seed.json");
+      if (!res.ok) throw new Error("Gagal memuat file seed.json");
+      const json = await res.json();
+      rootData = Array.isArray(json) ? buildHierarchy(json) : json.data || json;
+    } else {
+      // 2. Opsi saat berjalan di komputer lokal (mengambil dari backend SQL/Prisma)
+      console.log("Memuat data daftar dari backend lokal...");
+      const res = await fetch("http://localhost:5001/api/genealogy/tree");
+      if (!res.ok) throw new Error("Gagal memuat data silsilah dari server lokal");
+      const json = await res.json();
+      rootData = json.data;
+    }
 
     if (!rootData) {
       container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Data silsilah kosong.</div>`;
@@ -27,10 +42,7 @@ export async function renderGenealogyList(containerSelector: string, branchFilte
     if (branchFilter && branchFilter.trim() !== "") {
       const match = (rootData.children || []).find((c: any) => c.fullName.includes(branchFilter));
       if (match) {
-        rootData = {
-          ...rootData,
-          children: [match]
-        };
+        rootData = { ...rootData, children: [match] };
       }
     }
 
@@ -55,23 +67,23 @@ export async function renderGenealogyList(containerSelector: string, branchFilte
       const badgeBg = isAlive ? "rgba(16, 185, 129, 0.15)" : "rgba(107, 114, 128, 0.2)";
       const badgeColor = isAlive ? "#34d399" : "#9ca3af";
       const borderBadge = isAlive ? "rgba(16, 185, 129, 0.3)" : "rgba(107, 114, 128, 0.3)";
-
       const spouse = node.spouseInfo && node.spouseInfo.trim() !== "" ? node.spouseInfo : "(Belum diisi)";
       const origin = node.originVillage && node.originVillage.trim() !== "" ? node.originVillage : "(Belum diisi)";
       const indent = depth * 24;
+      
       const children = node.children || node._children || [];
       const hasChildren = children.length > 0;
 
       let html = `
-        <div class="list-member-item"
-          data-id="${node.id || ''}"
-          data-name="${node.fullName || 'Tanpa Nama'}"
-          data-alias="${node.taromboName || ''}"
-          data-alive="${isAlive}"
-          data-gen="${node.generationLevel || depth + 1}"
-          data-spouse="${node.spouseInfo || ''}"
-          data-origin="${node.originVillage || ''}"
-          data-notes="${node.notes || ''}"
+        <div class="list-member-item" 
+          data-id="${node.id || ''}" 
+          data-name="${node.fullName || 'Tanpa Nama'}" 
+          data-alias="${node.taromboName || ''}" 
+          data-alive="${isAlive}" 
+          data-gen="${node.generationLevel || depth + 1}" 
+          data-spouse="${node.spouseInfo || ''}" 
+          data-origin="${node.originVillage || ''}" 
+          data-notes="${node.notes || ''}" 
           style="margin-left: ${indent}px; margin-bottom: 8px; background: var(--bg-card); border: 1px solid var(--border-color); border-left: 3px solid ${depth === 0 ? 'var(--accent-red)' : '#4b5563'}; border-radius: 6px; padding: 10px 14px; cursor: pointer; transition: transform 0.15s ease, border-color 0.15s ease;">
           <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
             <div style="display: flex; align-items: center; gap: 8px;">
@@ -118,7 +130,7 @@ export async function renderGenealogyList(containerSelector: string, branchFilte
       el.addEventListener("click", (e) => {
         const target = e.target as HTMLElement;
         if (target.closest(".btn-list-add-child")) return;
-
+        
         const item = {
           id: el.getAttribute("data-id"),
           fullName: el.getAttribute("data-name"),
@@ -146,6 +158,36 @@ export async function renderGenealogyList(containerSelector: string, branchFilte
     });
 
   } catch (err) {
+    console.error("Gagal memuat daftar silsilah:", err);
     container.innerHTML = `<div style="text-align: center; color: #f87171; padding: 40px;">Gagal memuat daftar silsilah.</div>`;
   }
+}
+
+/**
+ * Fungsi untuk mengubah data array datar dari seed.json 
+ * menjadi struktur hierarki (parent-child)
+ */
+function buildHierarchy(flatData: any[]) {
+  const map = new Map();
+  let root = null;
+
+  flatData.forEach((item) => {
+    map.set(item.id, { ...item, children: [] });
+  });
+
+  flatData.forEach((item) => {
+    const node = map.get(item.id);
+    const parentId = item.parentIdRaw || item.parentId;
+    
+    if (parentId) {
+      const parent = map.get(parentId);
+      if (parent) {
+        parent.children.push(node);
+      }
+    } else {
+      root = node;
+    }
+  });
+
+  return root;
 }

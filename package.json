@@ -1,0 +1,10 @@
+{
+  "name": "tarombo-sidabukke-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "convert:json": "node convert-seed.js",
+    "build:frontend": "cd frontend && npm run build",
+    "build": "npm run convert:json && npm run build:frontend"
+  }
+}
