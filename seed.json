@@ -1,0 +1,274 @@
+[
+  {
+    "id": "person_1",
+    "fullName": "Raja Sinalin",
+    "generationLevel": 1,
+    "parentIdRaw": "undefined",
+    "orderIndex": 1,
+    "notes": "Raja Sinalin (Raja Sidabukke) i ma ompu na parjolo di Huta Sangkal, Sibatubatu (Samosir)."
+  },
+  {
+    "id": "person_2",
+    "fullName": "Op. Dukit Talun",
+    "generationLevel": 2,
+    "parentIdRaw": "rajaSinalin.id",
+    "orderIndex": 1,
+    "notes": "Anak parjolo ni Raja Sinalin."
+  },
+  {
+    "id": "person_3",
+    "fullName": "Op. Guru Marsait Lipan",
+    "generationLevel": 2,
+    "parentIdRaw": "rajaSinalin.id",
+    "orderIndex": 2,
+    "notes": "Anak paduahon ni Raja Sinalin."
+  },
+  {
+    "id": "person_4",
+    "fullName": "Op. Ni Unggul",
+    "generationLevel": 2,
+    "parentIdRaw": "rajaSinalin.id",
+    "orderIndex": 3,
+    "notes": "Anak patoluhon ni Raja Sinalin."
+  },
+  {
+    "id": "person_5",
+    "fullName": "Op. Soimbangon",
+    "generationLevel": 3,
+    "parentIdRaw": "opDukitTalun.id",
+    "orderIndex": 1,
+    "notes": "Pomparan Op. Dukit Talun."
+  },
+  {
+    "id": "person_6",
+    "fullName": "Op. Mangara",
+    "generationLevel": 3,
+    "parentIdRaw": "opDukitTalun.id",
+    "orderIndex": 2,
+    "notes": "Pomparan Op. Dukit Talun."
+  },
+  {
+    "id": "person_7",
+    "fullName": "A. Soimbangon",
+    "generationLevel": 4,
+    "parentIdRaw": "opDukit1.id",
+    "orderIndex": 1,
+    "notes": null
+  },
+  {
+    "id": "person_8",
+    "fullName": "A. Mangara",
+    "generationLevel": 4,
+    "parentIdRaw": "opDukit2.id",
+    "orderIndex": 1,
+    "notes": null
+  },
+  {
+    "id": "person_9",
+    "fullName": "Op. Bunga Tolong",
+    "generationLevel": 3,
+    "parentIdRaw": "opGuruMarsait.id",
+    "orderIndex": 1,
+    "notes": null
+  },
+  {
+    "id": "person_10",
+    "fullName": "Op. Sininta",
+    "generationLevel": 3,
+    "parentIdRaw": "opGuruMarsait.id",
+    "orderIndex": 2,
+    "notes": null
+  },
+  {
+    "id": "person_11",
+    "fullName": "Op. Bunga Indot",
+    "generationLevel": 4,
+    "parentIdRaw": "opBungaTolong.id",
+    "orderIndex": 1,
+    "notes": null
+  },
+  {
+    "id": "person_12",
+    "fullName": "Op. Dahang",
+    "generationLevel": 4,
+    "parentIdRaw": "opBungaTolong.id",
+    "orderIndex": 2,
+    "notes": null
+  },
+  {
+    "id": "person_13",
+    "fullName": "Op. Plahu",
+    "generationLevel": 5,
+    "parentIdRaw": "opBungaIndot.id",
+    "orderIndex": 1,
+    "notes": null
+  },
+  {
+    "id": "person_14",
+    "fullName": "P. Sakunak",
+    "generationLevel": 6,
+    "parentIdRaw": "opPlahu.id",
+    "orderIndex": 1,
+    "notes": null
+  },
+  {
+    "id": "person_15",
+    "fullName": "Op. Gaji",
+    "generationLevel": 7,
+    "parentIdRaw": "pSakunak.id",
+    "orderIndex": 1,
+    "notes": null
+  },
+  {
+    "id": "person_16",
+    "fullName": "A. Lage",
+    "generationLevel": 5,
+    "parentIdRaw": "opDahang.id",
+    "orderIndex": 1,
+    "notes": null
+  },
+  {
+    "id": "person_17",
+    "fullName": "Op. Ppaga",
+    "generationLevel": 5,
+    "parentIdRaw": "opDahang.id",
+    "orderIndex": 2,
+    "notes": null
+  },
+  {
+    "id": "person_18",
+    "fullName": "Op. Basar",
+    "generationLevel": 5,
+    "parentIdRaw": "opDahang.id",
+    "orderIndex": 3,
+    "notes": null
+  },
+  {
+    "id": "person_19",
+    "fullName": "Timbang",
+    "generationLevel": 5,
+    "parentIdRaw": "opDahang.id",
+    "orderIndex": 4,
+    "notes": null
+  },
+  {
+    "id": "person_20",
+    "fullName": "Badia",
+    "generationLevel": 5,
+    "parentIdRaw": "opDahang.id",
+    "orderIndex": 5,
+    "notes": null
+  },
+  {
+    "id": "person_21",
+    "fullName": "A. Paga",
+    "generationLevel": 6,
+    "parentIdRaw": "opPpaga.id",
+    "orderIndex": 1,
+    "notes": null
+  },
+  {
+    "id": "person_22",
+    "fullName": "A. Basar",
+    "generationLevel": 6,
+    "parentIdRaw": "opBasar.id",
+    "orderIndex": 1,
+    "notes": null
+  },
+  {
+    "id": "person_23",
+    "fullName": "A. Ruhut",
+    "generationLevel": 4,
+    "parentIdRaw": "opSininta.id",
+    "orderIndex": 1,
+    "notes": null
+  },
+  {
+    "id": "person_24",
+    "fullName": "A. Sininta",
+    "generationLevel": 4,
+    "parentIdRaw": "opSininta.id",
+    "orderIndex": 2,
+    "notes": null
+  },
+  {
+    "id": "person_25",
+    "fullName": "Op. Ombing",
+    "generationLevel": 3,
+    "parentIdRaw": "opNiUnggul.id",
+    "orderIndex": 1,
+    "notes": null
+  },
+  {
+    "id": "person_26",
+    "fullName": "Op. Bangun",
+    "generationLevel": 3,
+    "parentIdRaw": "opNiUnggul.id",
+    "orderIndex": 2,
+    "notes": null
+  },
+  {
+    "id": "person_27",
+    "fullName": "Op. Pasu",
+    "generationLevel": 3,
+    "parentIdRaw": "opNiUnggul.id",
+    "orderIndex": 3,
+    "notes": null
+  },
+  {
+    "id": "person_28",
+    "fullName": "Op. Sumirlan",
+    "generationLevel": 3,
+    "parentIdRaw": "opNiUnggul.id",
+    "orderIndex": 4,
+    "notes": null
+  },
+  {
+    "id": "person_29",
+    "fullName": "Op. Jalur",
+    "generationLevel": 4,
+    "parentIdRaw": "opOmbing.id",
+    "orderIndex": 1,
+    "notes": null
+  },
+  {
+    "id": "person_30",
+    "fullName": "Rualji",
+    "generationLevel": 5,
+    "parentIdRaw": "opJalur.id",
+    "orderIndex": 1,
+    "notes": null
+  },
+  {
+    "id": "person_31",
+    "fullName": "Op. Bontor",
+    "generationLevel": 4,
+    "parentIdRaw": "opBangun.id",
+    "orderIndex": 1,
+    "notes": null
+  },
+  {
+    "id": "person_32",
+    "fullName": "A. Pasu",
+    "generationLevel": 4,
+    "parentIdRaw": "opPasu.id",
+    "orderIndex": 1,
+    "notes": null
+  },
+  {
+    "id": "person_33",
+    "fullName": "A. Sumirlan",
+    "generationLevel": 4,
+    "parentIdRaw": "opSumirlan.id",
+    "orderIndex": 1,
+    "notes": null
+  },
+  {
+    "id": "person_34",
+    "fullName": "Haminta",
+    "generationLevel": 5,
+    "parentIdRaw": "aSumirlan.id",
+    "orderIndex": 1,
+    "notes": null
+  }
+]
