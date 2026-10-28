@@ -3,272 +3,306 @@
     "id": "person_1",
     "fullName": "Raja Sinalin",
     "generationLevel": 1,
-    "parentIdRaw": "undefined",
+    "parentId": null,
     "orderIndex": 1,
-    "notes": "Raja Sinalin (Raja Sidabukke) i ma ompu na parjolo di Huta Sangkal, Sibatubatu (Samosir)."
+    "notes": "Raja Sinalin (Raja Sidabukke) i ma ompu na parjolo di Huta Sangkal, Sibatubatu (Samosir).",
+    "isAlive": false
   },
   {
     "id": "person_2",
     "fullName": "Op. Dukit Talun",
     "generationLevel": 2,
-    "parentIdRaw": "rajaSinalin.id",
+    "parentId": "person_1",
     "orderIndex": 1,
-    "notes": "Anak parjolo ni Raja Sinalin."
+    "notes": "Anak parjolo ni Raja Sinalin.",
+    "isAlive": false
   },
   {
     "id": "person_3",
     "fullName": "Op. Guru Marsait Lipan",
     "generationLevel": 2,
-    "parentIdRaw": "rajaSinalin.id",
+    "parentId": "person_1",
     "orderIndex": 2,
-    "notes": "Anak paduahon ni Raja Sinalin."
+    "notes": "Anak paduahon ni Raja Sinalin.",
+    "isAlive": false
   },
   {
     "id": "person_4",
     "fullName": "Op. Ni Unggul",
     "generationLevel": 2,
-    "parentIdRaw": "rajaSinalin.id",
+    "parentId": "person_1",
     "orderIndex": 3,
-    "notes": "Anak patoluhon ni Raja Sinalin."
+    "notes": "Anak patoluhon ni Raja Sinalin.",
+    "isAlive": false
   },
   {
     "id": "person_5",
     "fullName": "Op. Soimbangon",
     "generationLevel": 3,
-    "parentIdRaw": "opDukitTalun.id",
+    "parentId": "person_2",
     "orderIndex": 1,
-    "notes": "Pomparan Op. Dukit Talun."
+    "notes": "Pomparan Op. Dukit Talun.",
+    "isAlive": false
   },
   {
     "id": "person_6",
     "fullName": "Op. Mangara",
     "generationLevel": 3,
-    "parentIdRaw": "opDukitTalun.id",
+    "parentId": "person_2",
     "orderIndex": 2,
-    "notes": "Pomparan Op. Dukit Talun."
+    "notes": "Pomparan Op. Dukit Talun.",
+    "isAlive": false
   },
   {
     "id": "person_7",
     "fullName": "A. Soimbangon",
     "generationLevel": 4,
-    "parentIdRaw": "opDukit1.id",
+    "parentId": "person_5",
     "orderIndex": 1,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_8",
     "fullName": "A. Mangara",
     "generationLevel": 4,
-    "parentIdRaw": "opDukit2.id",
+    "parentId": "person_6",
     "orderIndex": 1,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_9",
     "fullName": "Op. Bunga Tolong",
     "generationLevel": 3,
-    "parentIdRaw": "opGuruMarsait.id",
+    "parentId": "person_3",
     "orderIndex": 1,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_10",
     "fullName": "Op. Sininta",
     "generationLevel": 3,
-    "parentIdRaw": "opGuruMarsait.id",
+    "parentId": "person_3",
     "orderIndex": 2,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_11",
     "fullName": "Op. Bunga Indot",
     "generationLevel": 4,
-    "parentIdRaw": "opBungaTolong.id",
+    "parentId": "person_9",
     "orderIndex": 1,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_12",
     "fullName": "Op. Dahang",
     "generationLevel": 4,
-    "parentIdRaw": "opBungaTolong.id",
+    "parentId": "person_9",
     "orderIndex": 2,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_13",
     "fullName": "Op. Plahu",
     "generationLevel": 5,
-    "parentIdRaw": "opBungaIndot.id",
+    "parentId": "person_11",
     "orderIndex": 1,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_14",
     "fullName": "P. Sakunak",
     "generationLevel": 6,
-    "parentIdRaw": "opPlahu.id",
+    "parentId": "person_13",
     "orderIndex": 1,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_15",
     "fullName": "Op. Gaji",
     "generationLevel": 7,
-    "parentIdRaw": "pSakunak.id",
+    "parentId": "person_14",
     "orderIndex": 1,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_16",
     "fullName": "A. Lage",
     "generationLevel": 5,
-    "parentIdRaw": "opDahang.id",
+    "parentId": "person_12",
     "orderIndex": 1,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_17",
     "fullName": "Op. Ppaga",
     "generationLevel": 5,
-    "parentIdRaw": "opDahang.id",
+    "parentId": "person_12",
     "orderIndex": 2,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_18",
     "fullName": "Op. Basar",
     "generationLevel": 5,
-    "parentIdRaw": "opDahang.id",
+    "parentId": "person_12",
     "orderIndex": 3,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_19",
     "fullName": "Timbang",
     "generationLevel": 5,
-    "parentIdRaw": "opDahang.id",
+    "parentId": "person_12",
     "orderIndex": 4,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_20",
     "fullName": "Badia",
     "generationLevel": 5,
-    "parentIdRaw": "opDahang.id",
+    "parentId": "person_12",
     "orderIndex": 5,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_21",
     "fullName": "A. Paga",
     "generationLevel": 6,
-    "parentIdRaw": "opPpaga.id",
+    "parentId": "person_17",
     "orderIndex": 1,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_22",
     "fullName": "A. Basar",
     "generationLevel": 6,
-    "parentIdRaw": "opBasar.id",
+    "parentId": "person_18",
     "orderIndex": 1,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_23",
     "fullName": "A. Ruhut",
     "generationLevel": 4,
-    "parentIdRaw": "opSininta.id",
+    "parentId": "person_10",
     "orderIndex": 1,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_24",
     "fullName": "A. Sininta",
     "generationLevel": 4,
-    "parentIdRaw": "opSininta.id",
+    "parentId": "person_10",
     "orderIndex": 2,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_25",
     "fullName": "Op. Ombing",
     "generationLevel": 3,
-    "parentIdRaw": "opNiUnggul.id",
+    "parentId": "person_4",
     "orderIndex": 1,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_26",
     "fullName": "Op. Bangun",
     "generationLevel": 3,
-    "parentIdRaw": "opNiUnggul.id",
+    "parentId": "person_4",
     "orderIndex": 2,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_27",
     "fullName": "Op. Pasu",
     "generationLevel": 3,
-    "parentIdRaw": "opNiUnggul.id",
+    "parentId": "person_4",
     "orderIndex": 3,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_28",
     "fullName": "Op. Sumirlan",
     "generationLevel": 3,
-    "parentIdRaw": "opNiUnggul.id",
+    "parentId": "person_4",
     "orderIndex": 4,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_29",
     "fullName": "Op. Jalur",
     "generationLevel": 4,
-    "parentIdRaw": "opOmbing.id",
+    "parentId": "person_25",
     "orderIndex": 1,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_30",
     "fullName": "Rualji",
     "generationLevel": 5,
-    "parentIdRaw": "opJalur.id",
+    "parentId": "person_29",
     "orderIndex": 1,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_31",
     "fullName": "Op. Bontor",
     "generationLevel": 4,
-    "parentIdRaw": "opBangun.id",
+    "parentId": "person_26",
     "orderIndex": 1,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_32",
     "fullName": "A. Pasu",
     "generationLevel": 4,
-    "parentIdRaw": "opPasu.id",
+    "parentId": "person_27",
     "orderIndex": 1,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_33",
     "fullName": "A. Sumirlan",
     "generationLevel": 4,
-    "parentIdRaw": "opSumirlan.id",
+    "parentId": "person_28",
     "orderIndex": 1,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   },
   {
     "id": "person_34",
     "fullName": "Haminta",
     "generationLevel": 5,
-    "parentIdRaw": "aSumirlan.id",
+    "parentId": "person_33",
     "orderIndex": 1,
-    "notes": null
+    "notes": null,
+    "isAlive": false
   }
 ]
