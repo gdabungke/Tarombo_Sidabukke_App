@@ -4,6 +4,9 @@ backend/
 # Abaikan file teks rangkuman kode
 full_project_code.txt
 
+# Abaikan file sampah khusus macOS
+.DS_Store
+
 # Abaikan file environment atau database lokal
 .env
 *.db
