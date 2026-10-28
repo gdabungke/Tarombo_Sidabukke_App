@@ -2,12 +2,12 @@ const fs = require('fs');
 const path = require('path');
 
 try {
-  console.log('Membaca backend/prisma/seed.ts untuk dijadikan tarombo-data.json...');
+  console.log('Membaca backend/prisma/seed.ts untuk dijadikan public/seed.json...');
   
   const seedFilePath = path.join(__dirname, 'backend/prisma/seed.ts');
   const seedContent = fs.readFileSync(seedFilePath, 'utf8');
 
-  // Mengekstrak data addPerson dari seed.ts secara otomatis menggunakan Regular Expression
+  // Mengekstrak data addPerson dari seed.ts secara otomatis
   const matches = [...seedContent.matchAll(/addPerson\("([^"]+)",\s*(\d+)(?:,\s*([^,]+))?(?:,\s*(\d+))?(?:,\s*"([^"]+)")?\)/g)];
 
   const taromboNodes = matches.map((match, index) => ({
@@ -19,14 +19,14 @@ try {
     notes: match[5] || null
   }));
 
-  // Disimpan langsung sebagai file JSON murni di dalam folder frontend/src/data/seed.json
-  const outputPath = path.join(__dirname, 'frontend/src/data/seed.json');
+  // Disimpan langsung ke dalam folder frontend/public/seed.json
+  const outputPath = path.join(__dirname, 'frontend/public/seed.json');
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   
   fs.writeFileSync(outputPath, JSON.stringify(taromboNodes, null, 2), 'utf8');
-  console.log(`Sukses! Berhasil merakit ${taromboNodes.length} data menjadi ${outputPath}`);
+  console.log(`Sukses! Berhasil merakit ${taromboNodes.length} data menjadi frontend/public/seed.json.`);
 
 } catch (error) {
-  console.error('Gagal mengkonversi seed.ts ke JSON:', error);
+  console.error('Gagal mengkonversi seed.ts ke seed.json:', error);
   process.exit(1);
 }

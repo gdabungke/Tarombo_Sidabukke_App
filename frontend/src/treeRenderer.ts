@@ -135,10 +135,14 @@ export async function renderGenealogyTree(svgSelector: string, branchFilter?: st
   const isGitHubPages = window.location.hostname.includes("github.io");
 
   if (isGitHubPages) {
-    // 1. Opsi saat online di GitHub Pages (mengambil seed.json statis)
+    // 1. Opsi saat online di GitHub Pages (mengambil seed.json statis dari public)
     console.log("Memuat data statis dari seed.json untuk GitHub Pages...");
-    const res = await fetch("./seed.json"); // Sesuaikan path jika ditaruh di dalam folder src/data/
-    if (!res.ok) throw new Error("Gagal memuat file seed.json");
+    
+    // Menggunakan BASE_URL Vite agar jalurnya akurat di GitHub Pages
+    const jsonUrl = `${import.meta.env.BASE_URL}seed.json`;
+    const res = await fetch(jsonUrl);
+    
+    if (!res.ok) throw new Error(`Gagal memuat file dari ${jsonUrl}`);
     const json = await res.json();
     rootData = Array.isArray(json) ? buildHierarchy(json) : json.data || json;
   } else {
@@ -150,7 +154,10 @@ export async function renderGenealogyTree(svgSelector: string, branchFilter?: st
     rootData = json.data;
   }
 
-  if (!rootData) return;
+  if (!rootData) {
+      container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Data silsilah kosong.</div>`;
+      return;
+    }
 
   // ... sisa kode selanjutnya tetap sama
 

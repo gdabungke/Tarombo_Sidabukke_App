@@ -12,31 +12,35 @@ export async function renderByGeneration(containerSelector: string, branchFilter
   container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Mamillit data sundut (Memuat generasi)...</div>`;
 
   try {
-    let rootData;
+  let rootData;
 
-    // Cek apakah aplikasi sedang berjalan di GitHub Pages atau di localhost
-    const isGitHubPages = window.location.hostname.includes("github.io");
+  // Cek apakah aplikasi sedang berjalan di GitHub Pages atau di localhost
+  const isGitHubPages = window.location.hostname.includes("github.io");
 
-    if (isGitHubPages) {
-      // 1. Opsi saat online di GitHub Pages (mengambil seed.json statis)
-      console.log("Memuat data generasi statis dari seed.json untuk GitHub Pages...");
-      const res = await fetch("./seed.json");
-      if (!res.ok) throw new Error("Gagal memuat file seed.json");
-      const json = await res.json();
-      rootData = Array.isArray(json) ? buildHierarchy(json) : json.data || json;
-    } else {
-      // 2. Opsi saat berjalan di komputer lokal (mengambil dari backend SQL/Prisma)
-      console.log("Memuat data generasi dari backend lokal...");
-      const res = await fetch("http://localhost:5001/api/genealogy/tree");
-      if (!res.ok) throw new Error("Gagal memuat data dari server lokal");
-      const json = await res.json();
-      rootData = json.data;
-    }
+  if (isGitHubPages) {
+    // 1. Opsi saat online di GitHub Pages (mengambil seed.json statis dari public)
+    console.log("Memuat data tabel statis dari seed.json untuk GitHub Pages...");
+    
+    // Menggunakan BASE_URL Vite agar jalurnya akurat dan tidak 404 di GitHub Pages
+    const jsonUrl = `${import.meta.env.BASE_URL}seed.json`;
+    const res = await fetch(jsonUrl);
+    
+    if (!res.ok) throw new Error(`Gagal memuat file dari ${jsonUrl}`);
+    const json = await res.json();
+    rootData = Array.isArray(json) ? buildHierarchy(json) : json.data || json;
+  } else {
+    // 2. Opsi saat berjalan di komputer lokal (mengambil dari backend SQL/Prisma)
+    console.log("Memuat data tabel dari backend lokal...");
+    const res = await fetch("http://localhost:5001/api/genealogy/tree");
+    if (!res.ok) throw new Error("Gagal memuat data dari server lokal");
+    const json = await res.json();
+    rootData = json.data;
+  }
 
-    if (!rootData) {
-      container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Data silsilah kosong.</div>`;
-      return;
-    }
+  if (!rootData) {
+    container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Data silsilah kosong.</div>`;
+    return;
+  }
 
     // Filter Cabang Ompu jika dipilih
     if (branchFilter && branchFilter.trim() !== "") {
