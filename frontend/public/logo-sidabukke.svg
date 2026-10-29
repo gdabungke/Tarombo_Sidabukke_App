@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1254 1254" width="100%" height="100%">
+  <defs>
+    <g id="Pagar_Sisi_Kiri">
+      <polygon points="351,665 371,660 371,724 351,729" fill="#151E26" />
+      <polygon points="396,645 418,640 418,713 396,718" fill="#151E26" />
+      <rect x="499" y="618" width="23" height="73" fill="#151E26" />
+      <polygon points="371,668 502,630 502,636 371,674" fill="#151E26" />
+      <polygon points="371,687 502,650 502,656 371,693" fill="#151E26" />
+      <polygon points="371,706 502,670 502,676 371,712" fill="#151E26" />
+      <rect x="520" y="626" width="85" height="6" fill="#151E26" />
+      <rect x="520" y="647" width="85" height="6" fill="#151E26" />
+      <rect x="520" y="668" width="85" height="6" fill="#151E26" />
+    </g>
+    <g id="Gorga_Sayap_Kiri" fill="none" stroke="#FCFCFC" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 354,756 C 358,741 365,740 369,752 C 373,763 380,761 384,748 C 388,736 395,735 399,746 C 403,757 410,755 414,742 C 418,730 425,729 429,740 C 433,751 440,749 444,736 C 448,724 455,723 459,734 C 463,745 470,743 474,730 C 478,718 485,717 489,728 C 493,739 498,736 502,724" />
+      <circle cx="369" cy="738" r="2.2" fill="#FCFCFC" stroke="none" />
+      <circle cx="399" cy="732" r="2.2" fill="#FCFCFC" stroke="none" />
+      <circle cx="429" cy="726" r="2.2" fill="#FCFCFC" stroke="none" />
+      <circle cx="459" cy="720" r="2.2" fill="#FCFCFC" stroke="none" />
+      <circle cx="489" cy="714" r="2.2" fill="#FCFCFC" stroke="none" />
+    </g>
+    <g id="Modul_Gorga_Tengah" fill="none" stroke="#FCFCFC" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M -28,728 C -20,728 -18,709 0,709 C 18,709 22,729 8,729 C -2,729 -3,718 5,718" />
+      <circle cx="-18" cy="713" r="2.8" fill="#FCFCFC" stroke="none" />
+      <circle cx="21" cy="728" r="2.5" fill="#FCFCFC" stroke="none" />
+    </g>
+  </defs>
+
+  <g id="Layer_Monumen_Tugu">
+    <polygon id="Puncak_Atap" points="627,80 667,113 667,145 656,156 598,156 587,145 587,113" fill="#151E26" />
+    <rect id="Jendela_Puncak" x="593" y="122" width="68" height="11" fill="#FCFCFC" />
+    <polygon id="Batang_Menara" points="598,156 656,156 683,571 716,571 716,691 538,691 538,571 571,571" fill="#151E26" />
+    <polygon id="Celah_Tengah_Menara" points="625,156 637,156 643,571 623,571" fill="#FCFCFC" />
+    <use href="#Pagar_Sisi_Kiri" />
+    <use href="#Pagar_Sisi_Kiri" transform="translate(1254, 0) scale(-1, 1)" />
+    <polygon id="Segitiga_Putih_Outline" points="627,565 552,693 702,693" fill="#FCFCFC" />
+    <polygon id="Segitiga_Atas_Merah" points="627,579 599,626 655,626" fill="#B80715" />
+    <polygon id="Tangga_Merah_1" points="596,631 658,631 667,647 587,647" fill="#B80715" />
+    <polygon id="Tangga_Merah_2" points="584,652 670,652 680,668 574,668" fill="#B80715" />
+    <polygon id="Tangga_Merah_3" points="571,674 683,674 693,691 561,691" fill="#B80715" />
+  </g>
+  <g id="Layer_Pita_Gorga_Batak">
+    <polygon id="Pita_Merah_Gorga" points="502,699 752,699 906,733 906,767 752,739 502,739 348,767 348,733" fill="#B80715" />
+    <use href="#Gorga_Sayap_Kiri" />
+    <use href="#Gorga_Sayap_Kiri" transform="translate(1254, 0) scale(-1, 1)" />
+    <use href="#Modul_Gorga_Tengah" transform="translate(536, 0)" />
+    <use href="#Modul_Gorga_Tengah" transform="translate(596, 0)" />
+    <use href="#Modul_Gorga_Tengah" transform="translate(718, 0) scale(-1, 1)" />
+    <use href="#Modul_Gorga_Tengah" transform="translate(658, 0) scale(-1, 1)" />
+    <circle cx="627" cy="720" r="3" fill="#FCFCFC" />
+  </g>
+  <g id="Layer_Pondasi_Bawah">
+    <polygon id="Pondasi_Utama" points="502,746 752,746 904,775 818,856 838,875 416,875 436,856 350,775" fill="#151E26" />
+    <polygon id="Cutout_Trapesium_Putih" points="506,804 748,804 770,876 758,876 739,814 515,814 496,876 484,876" fill="#FCFCFC" />
+  </g>
+</svg>
