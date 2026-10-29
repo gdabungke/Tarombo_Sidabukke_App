@@ -1,10 +1,4 @@
-/**
- * STYLING KODE: main.css
- * Lembar Gaya Utama: Pengaturan Reset Global, Sistem Modal,
- * Navbar & Dropdown Glassmorphism, Kartu Sejarah Berpendar,
- * Serta Konsistensi Warna Aksen (Merah & Kuning Emas).
- */
-
+/** * STYLING KODE: main.css * Lembar Gaya Utama: Pengaturan Reset Global, Sistem Modal, * Navbar & Dropdown Glassmorphism, Kartu Sejarah Berpendar, * Serta Konsistensi Warna Aksen (Merah & Kuning Emas). */
 @import "./variables.css";
 @import "./layout.css";
 @import "./hover.css";
@@ -25,11 +19,9 @@ body {
   flex-direction: column;
 }
 
-
 /* ========================================================
    2. SISTEM MODAL & FORM INPUT (LAYER & INTERAKTIVITAS)
    ======================================================== */
-/* Backdrop Blur Global */
 .modal-backdrop-blur {
   display: none;
   position: fixed;
@@ -45,7 +37,6 @@ body {
   z-index: 99990;
 }
 
-/* Status Saat Modal Aktif */
 .modal-backdrop-blur.show {
   display: flex !important;
   opacity: 1 !important;
@@ -53,14 +44,12 @@ body {
   pointer-events: auto !important;
 }
 
-/* Modal Tambah Anak (Kasta Layer Tertinggi) */
 #modal-add-member {
   z-index: 999999 !important;
   pointer-events: auto !important;
 }
 
-/* Kontainer Kotak Modal Animasi */
-.modal-backdrop-blur .modal-box-animated, 
+.modal-backdrop-blur .modal-box-animated,
 #modal-add-member .modal-box-animated {
   pointer-events: auto !important;
   position: relative !important;
@@ -71,13 +60,8 @@ body {
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
 }
 
-/* Buka Kunci Fokus & Interaksi Input Form di Modal */
-#modal-add-member input, 
-#modal-add-member textarea, 
-#modal-add-member select, 
-#modal-member-detail input, 
-#modal-member-detail textarea, 
-#modal-member-detail select {
+#modal-add-member input, #modal-add-member textarea, #modal-add-member select,
+#modal-member-detail input, #modal-member-detail textarea, #modal-member-detail select {
   pointer-events: auto !important;
   user-select: text !important;
   -webkit-user-select: text !important;
@@ -86,35 +70,39 @@ body {
   z-index: 1000001 !important;
 }
 
-/* Interaksi Tombol di Dalam Modal */
-#modal-add-member button, 
-#modal-member-detail button, 
-.modal-backdrop-blur button {
+#modal-add-member button, #modal-member-detail button, .modal-backdrop-blur button {
   pointer-events: auto !important;
   cursor: pointer !important;
   position: relative;
   z-index: 1000001 !important;
 }
 
-
 /* ========================================================
    3. NAVBAR, DROPDOWN ELEGAN, & TOOLTIP DINAMIS
    ======================================================== */
-/* Status Aktif Logo Brand Navbar */
 #btn-brand-dashboard.active {
   background: rgba(239, 68, 68, 0.15) !important;
   border: 1px solid rgba(239, 68, 68, 0.35) !important;
-} 
+}
+
 #btn-brand-dashboard.active svg, 
 #btn-brand-dashboard.active strong {
   color: var(--accent-red, #ef4444) !important;
 }
 
-/* Custom Dropdown Cabang (Glassmorphism) */
+/* Pengaturan Presisi Logo Navbar (Proporsional & Tidak Meluber) */
+.navbar-brand-logo {
+  height: 34px !important;
+  width: auto !important;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
 .custom-dropdown-container {
   position: relative;
   display: inline-block;
-} 
+}
+
 .custom-select-trigger {
   display: flex;
   align-items: center;
@@ -129,11 +117,13 @@ body {
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
-} 
+}
+
 .custom-select-trigger:hover {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.25);
-} 
+}
+
 .custom-dropdown-menu {
   display: none;
   position: absolute;
@@ -150,10 +140,12 @@ body {
   z-index: 1000;
   flex-direction: column;
   gap: 2px;
-} 
+}
+
 .custom-dropdown-menu.show {
   display: flex;
-} 
+}
+
 .custom-dropdown-item {
   padding: 6px 10px;
   border-radius: 5px;
@@ -164,14 +156,14 @@ body {
   align-items: center;
   gap: 6px;
   transition: background 0.15s ease, color 0.15s ease;
-} 
+}
+
 .custom-dropdown-item:hover, 
 .custom-dropdown-item.selected {
   background: var(--accent-red, #b91c1c);
   color: #fff;
 }
 
-/* Dropdown Pengguna Elegan */
 .pill-dropdown-box {
   background: rgba(24, 24, 32, 0.96) !important;
   backdrop-filter: blur(12px) !important;
@@ -180,7 +172,8 @@ body {
   border-radius: 8px !important;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6) !important;
   padding: 8px !important;
-} 
+}
+
 .pill-dropdown-box .dropdown-btn {
   background: transparent;
   border: none;
@@ -194,33 +187,31 @@ body {
   font-size: 11px;
   cursor: pointer;
   transition: background 0.15s;
-} 
+}
+
 .pill-dropdown-box .dropdown-btn:hover {
   background: rgba(255, 255, 255, 0.08);
-} 
+}
+
 .pill-dropdown-box .dropdown-btn.logout:hover {
   background: rgba(239, 68, 68, 0.18);
   color: #f87171;
 }
 
-/* Tooltip D3 Silsilah (Adaptif Mode Gelap & Terang) */
 #tree-hover-tooltip {
   background: var(--bg-card, #1c1c24) !important;
   color: var(--text-main, #1f2937) !important;
   border: 1px solid var(--border-color, #e5e7eb) !important;
   border-left: 3px solid var(--accent-red, #b91c1c) !important;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
-} 
+}
+
 body[data-theme="normal"] #tree-hover-tooltip {
   background: #ffffff !important;
   color: #1f2937 !important;
   border-color: #e5e7eb !important;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12) !important;
-} 
-body[data-theme="normal"] #tree-hover-tooltip span[style*="var(--text-muted)"] {
-  color: #6b7280 !important;
 }
-
 
 /* ========================================================
    4. BANNER HEADER KETERANGAN TIAP MENU
@@ -236,14 +227,16 @@ body[data-theme="normal"] #tree-hover-tooltip span[style*="var(--text-muted)"] {
   gap: 16px;
   align-items: flex-start;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-} 
+}
+
 .menu-header-banner .banner-icon {
   width: 32px;
   height: 32px;
   flex-shrink: 0;
   color: var(--accent-red, #ef4444);
   margin-top: 2px;
-} 
+}
+
 .menu-header-banner .banner-tag {
   font-size: 10px;
   font-weight: 700;
@@ -253,17 +246,20 @@ body[data-theme="normal"] #tree-hover-tooltip span[style*="var(--text-muted)"] {
   background: rgba(239, 68, 68, 0.15);
   padding: 2px 8px;
   border-radius: 4px;
-} 
+}
+
 .menu-header-banner .banner-subtitle {
   font-size: 11px;
   color: var(--text-muted, #9ca3af);
-} 
+}
+
 .menu-header-banner h2 {
   margin: 6px 0 4px 0;
   font-size: 17px;
   color: #ffffff;
   font-weight: 800;
-} 
+}
+
 .menu-header-banner p {
   margin: 0;
   font-size: 12px;
@@ -271,11 +267,9 @@ body[data-theme="normal"] #tree-hover-tooltip span[style*="var(--text-muted)"] {
   color: #d1d5db;
 }
 
-
 /* ========================================================
    5. DASHBOARD, LINIMASA SEJARAH, & ANIMASI HOVER
    ======================================================== */
-/* Masker Blur Lembut di Belakang Navbar Saat Scroll */
 .dashboard-top-blur-mask {
   position: fixed;
   top: 0;
@@ -287,48 +281,47 @@ body[data-theme="normal"] #tree-hover-tooltip span[style*="var(--text-muted)"] {
   -webkit-backdrop-filter: blur(12px);
   pointer-events: none;
   z-index: 30;
-} 
+}
 
-/* Kartu Interaktif Dashboard dengan Animasi Hover Halus & Pendaran Aksen */
 .dashboard-card-hover {
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.25s ease;
   will-change: transform, box-shadow;
-} 
+}
+
 .dashboard-card-hover:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45), 0 0 16px rgba(239, 68, 68, 0.2);
-  border-color: rgba(251, 191, 36, 0.45) !important; /* Berpendar Kuning Emas */
+  border-color: rgba(251, 191, 36, 0.45) !important;
 }
 
-/* Animasi Hover Baris Tabel Riwayat */
 .dashboard-row-hover {
   transition: background-color 0.2s ease, transform 0.15s ease;
-} 
-.dashboard-row-hover:hover {
-  background-color: rgba(239, 68, 68, 0.06) !important; /* Pendaran Merah Lembut */
 }
 
-/* Animasi Pendaran Batang Cabang Ompu */
+.dashboard-row-hover:hover {
+  background-color: rgba(239, 68, 68, 0.06) !important;
+}
+
 .branch-bar-container {
   transition: transform 0.2s ease;
-} 
+}
+
 .branch-bar-container:hover {
   transform: translateX(4px);
 }
 
-/* Kartu Melayang Linimasa Sejarah */
 .timeline-card-floating {
   position: relative;
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.3s ease;
   will-change: transform, filter;
-} 
+}
+
 .timeline-card-floating:hover {
   transform: translateY(-8px) scale(1.015);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 20px rgba(239, 68, 68, 0.25);
   border-color: rgba(251, 191, 36, 0.5) !important;
 }
 
-/* State Transisi Blur Linimasa */
 .timeline-shifting-blur {
   filter: blur(8px) brightness(1.2);
   transform: translateY(20px) scale(0.97);
@@ -337,46 +330,83 @@ body[data-theme="normal"] #tree-hover-tooltip span[style*="var(--text-muted)"] {
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Animasi Denyut & Memantul Tombol Panah Sejarah */
 @keyframes floatingBounce {
-  0%, 100% {
-    transform: translateY(0);
-    box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4);
-  } 
-  50% {
-    transform: translateY(6px);
-    box-shadow: 0 0 14px 4px rgba(251, 191, 36, 0.25);
-  }
-} 
+  0%, 100% { transform: translateY(0); box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4); }
+  50% { transform: translateY(6px); box-shadow: 0 0 14px 4px rgba(251, 191, 36, 0.25); }
+}
+
 .scroll-bounce-arrow {
   animation: floatingBounce 1.8s infinite ease-in-out;
 }
 
-
 /* ========================================================
-   6. SCROLLBAR Kustom TAMPILAN POHON SILSILAH
+   6. SCROLLBAR KUSTOM TAMPILAN POHON SILSILAH
    ======================================================== */
 #container-tree-graphic::-webkit-scrollbar {
   width: 10px;
   height: 10px;
-} 
+}
+
 #container-tree-graphic::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.35);
-} 
+}
+
 #container-tree-graphic::-webkit-scrollbar-thumb {
   background: var(--border-color, #374151);
   border-radius: 5px;
   border: 2px solid #121217;
-} 
+}
+
 #container-tree-graphic::-webkit-scrollbar-thumb:hover {
   background: var(--accent-red, #ef4444);
 }
 
-
 /* ========================================================
-   7. RESPONSIF MOBILE (JALUR LINIMASA & LAYOUT)
+   7. RESPONSIF MOBILE (OPTIMASI LAYAR HP ANDROID & IOS)
    ======================================================== */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
+  /* Perbaikan Floating Navbar agar ringkas, pas, dan tidak menutupi banner */
+  .app-floating-navbar {
+    padding: 3px 8px !important;
+    max-width: 95% !important;
+    min-height: 40px !important;
+  }
+  
+  .navbar-brand-logo {
+    height: 28px !important;  /* Ukuran logo pas dan proporsional di HP */
+    width: auto !important;
+  }
+  
+  .navbar-brand-text strong {
+    font-size: 11px !important;
+  }
+  
+  .navbar-brand-text span {
+    font-size: 9px !important;
+  }
+
+  /* Perbaikan Banner Menu agar teks dan ikon tidak terpotong di HP */
+  .menu-header-banner {
+    padding: 12px 14px !important;
+    gap: 10px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .menu-header-banner h2 {
+    font-size: 15px !important;
+  }
+
+  .menu-header-banner p {
+    font-size: 11px !important;
+  }
+
+  /* Perbaikan Filter Cabang Silsilah & Kontrol di HP */
+  .custom-select-trigger, .custom-dropdown-menu {
+    font-size: 10px !important;
+  }
+
+  /* Penyesuaian Linimasa Sejarah di Layar Kecil */
   #history-timeline-track > div:first-child {
     left: 15px !important;
   } 
@@ -386,63 +416,5 @@ body[data-theme="normal"] #tree-hover-tooltip span[style*="var(--text-muted)"] {
   } 
   .timeline-step-card > div {
     width: 100% !important;
-  }
-}
-
-/* Pengaturan dasar untuk logo di navbar (Desktop & Default) */
-.navbar-brand-logo {
-  width: 38px;
-  height: 38px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-
-/* Penyesuaian khusus untuk layar HP (Mobile / Android & iOS) */
-@media screen and (max-width: 768px) {
-  .app-floating-navbar {
-    padding: 4px 8px !important;
-    max-width: 95% !important;
-  }
-  
-  .navbar-brand-logo {
-    width: 32px;  /* Ukuran sedikit disesuaikan agar pas di layar HP */
-    height: 32px;
-  }
-  
-  .navbar-brand-text strong {
-    font-size: 11px !important;
-  }
-  
-  .navbar-brand-text span {
-    font-size: 9px !important;
-  }
-}
-
-/* Pengaturan logo di navbar (Desktop & Default) - Diperbesar sedikit */
-.navbar-brand-logo {
-  width: 46px;
-  height: 46px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-
-/* Penyesuaian khusus untuk layar HP (Mobile / Android & iOS) */
-@media screen and (max-width: 768px) {
-  .app-floating-navbar {
-    padding: 2px 6px !important;
-    max-width: 95% !important;
-  }
-  
-  .navbar-brand-logo {
-    width: 38px;  /* Ukuran logo di HP juga sedikit dinaikkan */
-    height: 38px;
-  }
-  
-  .navbar-brand-text strong {
-    font-size: 11px !important;
-  }
-  
-  .navbar-brand-text span {
-    font-size: 9px !important;
   }
 }
