@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tarombo Raja Sidabukke</title>
+
+  <link rel="icon" type="image/svg+xml" href="./logo-sidabukke.svg">
   
   <!-- Font Google: Plus Jakarta Sans & Noto Sans Batak Toba -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,25 +30,24 @@
       flex-direction: column;
     }
   </style>
-  <script type="module" crossorigin src="/Tarombo_Sidabukke_App/assets/index-Caw498Q0.js"></script>
-  <link rel="stylesheet" crossorigin href="/Tarombo_Sidabukke_App/assets/index-DeOpjTPz.css">
+  <script type="module" crossorigin src="/Tarombo_Sidabukke_App/assets/index-Y6-S8cmz.js"></script>
+  <link rel="stylesheet" crossorigin href="/Tarombo_Sidabukke_App/assets/index-C2Vi2kjY.css">
 </head>
 <body data-theme="dark">
 
   <!-- FLOATING NAVBAR UTAMA -->
   <nav class="app-floating-navbar">
-    <!-- Brand Logo -->
-    <button id="btn-brand-dashboard" class="nav-pill-btn" data-target="view-dashboard" title="Tarombo Raja Sidabukke" style="display: flex; align-items: center; gap: 7px; background: transparent; border: none; cursor: pointer; padding: 5px 10px; border-radius: 20px;">
-      
-      <!-- Ganti SVG lama dengan logo SVG baru Anda di sini -->
-      <img src="./logo-sidabukke.svg" alt="Logo" style="width: 24px; height: 24px; object-fit: contain; flex-shrink: 0;" />
-      
-      <div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1.1;">
-        <strong style="font-size: 12px; color: var(--accent-red, #ef4444); font-weight: 800; letter-spacing: 0.3px; white-space: nowrap;">Tarombo Raja Sidabukke</strong>
-        <span class="font-batak" style="font-size: 10px; color: #fbbf24; opacity: 0.85;">ᯖᯒᯔᯬ᯲ᯅᯬ ᯒᯐ ᯘᯪᯑᯅᯉ᯲ᯂᯩ</span>
-      </div>
-    </button>
-    </button>
+  <!-- Brand Logo & Judul -->
+  <button id="btn-brand-dashboard" class="nav-pill-btn" data-target="view-dashboard" title="Tarombo Raja Sidabukke" style="display: flex; align-items: center; gap: 8px; background: transparent; border: none; cursor: pointer; padding: 6px 12px; border-radius: 20px;">
+    
+    <!-- Logo SVG dengan kelas responsif -->
+    <img src="./logo-sidabukke.svg" alt="Logo" class="navbar-brand-logo" />
+    
+    <div class="navbar-brand-text" style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1.1;">
+      <strong style="color: var(--accent-red, #ef4444); font-weight: 800; letter-spacing: 0.3px; white-space: nowrap;">Tarombo Raja Sidabukke</strong>
+      <span class="font-batak" style="color: #fbbf24; opacity: 0.85;">ᯖᯒᯔᯬ᯲ᯅᯬ ᯒᯐ ᯘᯪᯑᯅᯉ᯲ᯂᯩ</span>
+    </div>
+  </button>
 
     <!-- Menu Navigasi Utama -->
     <div id="auth-nav-menu" style="display: none; align-items: center; gap: 3px;">

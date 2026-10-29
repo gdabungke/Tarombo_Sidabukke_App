@@ -388,3 +388,32 @@ body[data-theme="normal"] #tree-hover-tooltip span[style*="var(--text-muted)"] {
     width: 100% !important;
   }
 }
+
+/* Pengaturan dasar untuk logo di navbar (Desktop & Default) */
+.navbar-brand-logo {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Penyesuaian khusus untuk layar HP (Mobile / Android & iOS) */
+@media screen and (max-width: 768px) {
+  .app-floating-navbar {
+    padding: 4px 8px !important;
+    max-width: 95% !important;
+  }
+  
+  .navbar-brand-logo {
+    width: 32px;  /* Ukuran sedikit disesuaikan agar pas di layar HP */
+    height: 32px;
+  }
+  
+  .navbar-brand-text strong {
+    font-size: 11px !important;
+  }
+  
+  .navbar-brand-text span {
+    font-size: 9px !important;
+  }
+}
