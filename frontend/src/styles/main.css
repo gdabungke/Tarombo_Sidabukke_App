@@ -92,7 +92,7 @@ body {
 
 /* Pengaturan Presisi Logo Navbar (Proporsional & Tidak Meluber) */
 .navbar-brand-logo {
-  height: 34px !important;
+  height: 42px !important;
   width: auto !important;
   object-fit: contain;
   flex-shrink: 0;
@@ -373,7 +373,7 @@ body[data-theme="normal"] #tree-hover-tooltip {
   }
   
   .navbar-brand-logo {
-    height: 28px !important;  /* Ukuran logo pas dan proporsional di HP */
+    height: 34px !important;  /* Ukuran logo pas dan proporsional di HP */
     width: auto !important;
   }
   
