@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="100%" height="100%" fill="currentColor">
+  <!-- Siluet Tugu Utama & Pondasi (Satu Warna) -->
+  <polygon points="500,100 534,128 534,155 524,164 476,164 466,155 466,128" />
+  <polygon points="476,164 524,164 547,476 574,476 574,575 426,575 426,476 453,476" />
+  <polygon points="500,468 438,575 562,575" opacity="0.2" />
+  <polygon points="421,580 579,580 702,608 702,637 579,612 421,612 298,637 298,608" />
+  <polygon points="421,617 579,617 699,647 629,722 645,738 355,738 371,722 301,647" />
+</svg>
